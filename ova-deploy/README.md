@@ -1,4 +1,13 @@
-# How to Use
+# How To Bootstrap the Automated Deployment of IBM DataPower Gateway OVAs
+
+## Foreward
+
+While it is possible to automate the deployment DataPower OVAs with this tool, the overall experience still lags behind the native use of VMWare Tools on Linux.
+
+If you desire first-class integration with the VMWare ecosystem, we recommend that you use IBM DataPower Gateway for Linux combined with the full range of VMWare automation tools that are available for Linux. IBM DataPower Gateway for Linux is available under the same license as IBM DataPower Gateway for VMWare.
+
+If, on the other hand, you have a hard requirement to use IBM DataPower Gateway for VMWare, then this tool is just what you need to bootstrap an automated deployment.
+
 ## Pre-requisites
 * genisoimage
 * xsltproc
