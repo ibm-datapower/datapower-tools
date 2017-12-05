@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Environment xmlns="http://schemas.dmtf.org/ovf/environment/1" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ovf:id="DataPowerVirtualAppliance">
+	<PropertySection>
+	<Property ovfenv:key="ConfigPWD_ROOT.password" ovfenv:value="password"/>
+	<Property ovfenv:key="ConfigSOMA.enabled" ovfenv:value="true"/>
+	<Property ovfenv:key="ConfigSOMA.port" ovfenv:value="5550"/>
+	<Property ovfenv:key="ConfigWebGui.enabled" ovfenv:value="true"/>
+	<Property ovfenv:key="ConfigWebGui.port" ovfenv:value="9090"/>
+	<Property ovfenv:key="ConfigRAID.directory" ovfenv:value="raid0"/>
+
+	<Property ovfenv:key="ConfigNET.iface_name.1" ovfenv:value="eth0"/>
+	<Property ovfenv:key="ConfigNET.bootproto.1" ovfenv:value="static"/>
+	<Property ovfenv:key="ConfigNET.ipaddr.1" ovfenv:value="9.37.130.250"/>
+	<Property ovfenv:key="ConfigNET.netmask.1" ovfenv:value="255.255.255.128"/>
+	<Property ovfenv:key="ConfigNET.gateway.1" ovfenv:value="9.37.130.129"/>
+	
+	<Property ovfenv:key="ConfigNET.domain.1" ovfenv:value="dp.rtp.raleigh.ibm.com"/>
+	<Property ovfenv:key="ConfigNET.pri_dns.1" ovfenv:value="8.8.8.8"/>
+	<Property ovfenv:key="SecureBackupRestore.mode" ovfenv:value="secure"/>
+	<Property ovfenv:key="ConfigNTP.ntp_0" ovfenv:value="0.pool.ntp.org"/>
+	</PropertySection>
+</Environment>
