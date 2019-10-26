@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -H "xsl: `gzip -c $1 | base64 | sed -e :a -e '/.*[^\.]$/N;s/\n//;ba'`" --data-binary @$2 $3
