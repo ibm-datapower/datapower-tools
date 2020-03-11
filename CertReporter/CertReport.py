@@ -2,6 +2,7 @@
 # Certificate Report for all domains on DataPower
 # Charlie Sumner csumner@us.ibm.com
 # Modified for Python Version 2.7.13 (2017-10-13)
+# Added prompt for password (2019-02-12)
 
 import sys, httplib
 import base64
@@ -10,7 +11,7 @@ from xml.dom.minidom import parseString
 from optparse import OptionParser
 from datetime import datetime
 from DPCommonFunctions import getText, showResults, setHeaders, setAMPHeaders
-
+import time, getpass
 
 parser = OptionParser("usage: %prog -u userid -p password -s server {-e expirationdays -o outputFile -z parameterfile}")
 parser.add_option("-u", "--userid", dest="username", help="userid")
@@ -31,8 +32,11 @@ if options.file != None:
 
 if options.username == None:
     parser.error("no userid supplied")
+password = options.password
 if options.password == None:
-    parser.error("no password supplied")
+		print "No password found in options file"
+# Query password so it can be kept out of the parameter file
+		password = getpass.getpass()    
 if options.server == None:
     parser.error("no server name supplied")
 
@@ -50,7 +54,7 @@ def number_of_days_from_today(datestring):
 
     return td.days
 
-
+print "Using ",options.expWarnDays," days for the warning indicator"
         
 # Get name of Device using AMP for report header
         
@@ -64,7 +68,7 @@ SoapMessage = """<?xml version="1.0" encoding="UTF-8"?>
 # print SoapMessage
 
 #construct and send the headers
-webservice = setAMPHeaders(options.username,options.password,options.server, len(SoapMessage))
+webservice = setAMPHeaders(options.username,password,options.server, len(SoapMessage))
 webservice.send(SoapMessage)
 
 # get the response
@@ -118,7 +122,7 @@ SoapMessage = """<?xml version="1.0" encoding="UTF-8"?>
 # print SoapMessage
 
 #construct and send the headers
-webservice = setHeaders(options.username,options.password,options.server, len(SoapMessage))
+webservice = setHeaders(options.username,password,options.server, len(SoapMessage))
 webservice.send(SoapMessage)
 
 # get the response
@@ -141,7 +145,7 @@ for domainNode in fileNodes:
      nameNodes = domainNode.getElementsByTagName("Domain")[:1]
      name = nameNodes[0].childNodes[0].data
      domainsFound = domainsFound + 1
-#     print name
+     print "Processing Domain " + name
 
 # This code checks to see if there are is an empty set 
 #if len(fileNodes) == 0:
@@ -167,7 +171,7 @@ for domainNode in fileNodes:
 #     print SoapMessage
 
 #		construct and send the headers
-     webservice = setHeaders(options.username,options.password,options.server, len(SoapMessage))
+     webservice = setHeaders(options.username,password,options.server, len(SoapMessage))
      webservice.send(SoapMessage)
 
 #    get the response
@@ -213,7 +217,7 @@ for domainNode in fileNodes:
 #       print SoapMessage
 
 #	construct and send the headers
-        webservice = setHeaders(options.username,options.password,options.server, len(SoapMessage))
+        webservice = setHeaders(options.username,password,options.server, len(SoapMessage))
         webservice.send(SoapMessage)
 
 # get the response
@@ -237,10 +241,10 @@ for domainNode in fileNodes:
 
 # Check response, if no response, then it's likely not Firmware 7.5.2 or above
 
-        if len(certificates) == 0:
-        	print "Error: do-view-certificate-details did not return any details."
-        	print "Most likely cause is that the firmware level on the DataPower device is not at 7.5.2 or above"
-        	exit(28)
+#        if len(certificates) == 0:
+#        	print "Error: do-view-certificate-details did not return any details."
+#        	print "Most likely cause is that the firmware level on the DataPower device is not at 7.5.2 or above"
+#        	exit(28)
   
         for cert in certificates:
         	
@@ -297,7 +301,7 @@ for domainNode in fileNodes:
 #       print SoapMessage
 
 #	construct and send the headers
-          webservice = setHeaders(options.username,options.password,options.server, len(SoapMessage))
+          webservice = setHeaders(options.username,password,options.server, len(SoapMessage))
           webservice.send(SoapMessage)
 
 # get the response

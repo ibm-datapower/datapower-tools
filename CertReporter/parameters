@@ -1,0 +1,3 @@
+username = 'admin'
+server='192.168.30.134'
+expWarnDays='365'
