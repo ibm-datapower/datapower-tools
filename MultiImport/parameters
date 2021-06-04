@@ -1,0 +1,4 @@
+username = 'admin'
+domain='default'
+serverfile='servernamelist.txt'
+zipFilename='SSHServerProfile.zip'
