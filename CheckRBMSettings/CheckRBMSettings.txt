@@ -1,0 +1,7 @@
+mAdminState,enabled
+ApplyToCLI,on
+RestrictAdminToSerialPort,on
+FallbackLogin,disabled
+MaxFailedLogin,6
+LockoutPeriod,1
+

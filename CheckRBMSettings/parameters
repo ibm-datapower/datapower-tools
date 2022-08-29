@@ -1,0 +1,5 @@
+username = 'admin_backup'
+password = 'password'
+server='192.168.30.129'
+expWarnDays='90'
+csvoutput=True
