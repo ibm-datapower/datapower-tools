@@ -3,6 +3,7 @@
 XPath evaluation is done linear, with linear time complexity.  
 If for a big number (eg. 20000) ranges it needs to be determined, which range a number falls into, this can be better solved (with logarithmic time complexity) with "binary search".  
 Stylesheet genBin.xsl creates a binary search stylesheet from a range input file:  
+
     $ cat x7.xml 
     <es>
       <e min="1926" max="1990" value="G" />
