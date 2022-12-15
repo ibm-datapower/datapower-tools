@@ -16,7 +16,7 @@ Stylesheet genBin.xsl creates a binary search stylesheet from a range input file
     </es>
     $ 
 
-This is how binary searcch stylesheet get created:
+This is how binary search stylesheet gets created:
 
     $ coproc2 genBin.xsl x7.xml http://dp3-l3.boeblingen.de.ibm.com:2223 2>/dev/null >x7.xsl
     $
