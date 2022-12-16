@@ -46,7 +46,7 @@ My rool of thumb is this:
 Many customers use big routing XML files for decision against which backend to go.  
 As said, if there are many entries in that XML file, on average half of the entries need to be matched.  
 Here binary search could help, if XSLT 1.0 would allow for full string comparison.  
-Generated function "xsl:strcmp(a, b)" allows for that:  
+Generated function [xsl:strcmp(a, b)](https://github.com/ibm-datapower/datapower-tools/blob/master/XSLT_binary_search/genStrBin.xsl#L55-L103) allows for that:  
 - returns -1 if string a is less than string b
 - returns 0 if string a is equal to string b
 - returns 1 if string a is greater than string b
