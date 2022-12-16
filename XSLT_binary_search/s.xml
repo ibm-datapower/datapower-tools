@@ -1,0 +1,8 @@
+<es>
+  <e min="'king'"   max="'king'"   value="D" />
+  <e min="'rook'"   max="'rook'"   value="F" />
+  <e min="'queen'"  max="'queen'"  value="E" />
+  <e min="'bishop'" max="'bishop'" value="A" />
+  <e min="'knight'" max="'knight'" value="B" />
+  <e min="'pawn'"   max="'pawn'"   value="C" />
+</es>
