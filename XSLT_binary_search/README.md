@@ -5,6 +5,9 @@ Binary search with logarithmic time complexity can help here to reduce DataPower
 DataPower's XSLT 1.0 processor allows for comparison of numbers, see first section for an appplication.  
 XSLT 1.0 does not allow for string comparison other than equality and inequality, see second section for an application dispite that.  
 
+The examples make use of coproc2 tool, which is documented here:  
+[https://github.com/ibm-datapower/datapower-tools/tree/master/coproc2](https://github.com/ibm-datapower/datapower-tools/tree/master/coproc2)
+
 # Efficient number range search
 
 If for a big number (eg. 20000) of ranges it needs to be determined, which range a (more than 8-digit) number falls into, this can be better solved (with logarithmic time complexity) with "binary search".
