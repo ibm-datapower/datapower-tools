@@ -32,7 +32,7 @@ This is how binary search stylesheet gets created:
     $ coproc2 genBin.xsl x7.xml http://dp3-l3.boeblingen.de.ibm.com:2223 2>/dev/null >x7.xsl
     $
 
-You can see generated stylesheet x7.xsl in third section.
+You can see generated stylesheet x7.xsl in [third section](#example-output-for-genbinxsl-on-input-x7xml).
 
 It can be imported, and "xsl:rangeLookup(\_)" can be used.  
 Alternatively you can use the [little test template of x7.xsl](https://github.com/ibm-datapower/datapower-tools/blob/master/XSLT_binary_search/genBin.xsl#L52-L57):  
