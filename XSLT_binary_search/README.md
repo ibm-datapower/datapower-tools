@@ -30,7 +30,7 @@ This is how binary search stylesheet gets created:
     $
 
 It can be imported, and "xsl:rangeLookup(\_)" can be used.  
-Alternatively you can use the little test template of x7.xsl:  
+Alternatively you can use the [little test template of x7.xsl](https://github.com/ibm-datapower/datapower-tools/blob/master/XSLT_binary_search/genBin.xsl#L52-L57):  
 
     $ coproc2 x7.xsl <(echo "<x><y>1000</y><y>1001</y><y>1010</y><y>1011</y><y>1950</y></x>") http://dp3-l3.boeblingen.de.ibm.com:2223; echo
     -AA-G
@@ -70,7 +70,7 @@ This is how binary search stylesheet gets created:
     $ 
 
 Again it can be imported, and "xsl:rangeLookup(\_)" can be used.  
-Alternatively you can use the little test template of s.xsl:  
+Alternatively you can use the [little test template of s.xsl](https://github.com/ibm-datapower/datapower-tools/blob/master/XSLT_binary_search/genStrBin.xsl#L105-L110):  
 
     $ coproc2 s.xsl <(echo "<x><y>chess</y><y>queen</y><y>king</y><y>pawn</y><y>rook</y><y>bishop</y><y>knight</y></x>") http://dp3-l3.boeblingen.de.ibm.com:2223; echo
     -EDCFAB
