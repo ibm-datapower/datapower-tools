@@ -39,7 +39,7 @@ Alternatively you can use the [little test template of x7.xsl](https://github.co
 
 # Efficient string range search
 
-My rool of thumb is this:  
+My rule of thumb is this:  
 - for processing XML, use XSLT and XPath
 - for processing JSON or binary data, use GatewayScript
 
