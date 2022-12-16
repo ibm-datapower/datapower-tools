@@ -32,6 +32,8 @@ This is how binary search stylesheet gets created:
     $ coproc2 genBin.xsl x7.xml http://dp3-l3.boeblingen.de.ibm.com:2223 2>/dev/null >x7.xsl
     $
 
+You can see generated stylesheet x7.xsl in third section.
+
 It can be imported, and "xsl:rangeLookup(\_)" can be used.  
 Alternatively you can use the [little test template of x7.xsl](https://github.com/ibm-datapower/datapower-tools/blob/master/XSLT_binary_search/genBin.xsl#L52-L57):  
 
@@ -79,3 +81,90 @@ Alternatively you can use the [little test template of s.xsl](https://github.com
     -EDCFAB
     $ 
 
+# Example output for genBin.xsl on input x7.xml
+
+Just to give an idea on how the generated stylesheet looks like. Since the output 
+is a single line, I used pretty printer for inspection:  
+
+    $ xmllint --format x7.xsl 
+    <?xml version="1.0"?>
+    <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+      <func:function xmlns:func="http://exslt.org/functions" name="xsl:rangeLookup">
+        <xsl:param name="x"/>
+        <xsl:choose>
+          <xsl:when test="$x &lt; 1246">
+            <xsl:choose>
+              <xsl:when test="$x &lt; 1021">
+                <xsl:choose>
+                  <xsl:when test="$x &lt; 1001">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:when test="$x &gt; 1010">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <func:result select="'A'"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:when test="$x &gt; 1115">
+                <xsl:choose>
+                  <xsl:when test="$x &lt; 1131">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:when test="$x &gt; 1235">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <func:result select="'C'"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:otherwise>
+                <func:result select="'B'"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:when>
+          <xsl:when test="$x &gt; 1248">
+            <xsl:choose>
+              <xsl:when test="$x &lt; 1901">
+                <xsl:choose>
+                  <xsl:when test="$x &lt; 1521">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:when test="$x &gt; 1825">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <func:result select="'E'"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:when test="$x &gt; 1905">
+                <xsl:choose>
+                  <xsl:when test="$x &lt; 1926">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:when test="$x &gt; 1990">
+                    <func:result select="'-'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <func:result select="'G'"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:otherwise>
+                <func:result select="'F'"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:when>
+          <xsl:otherwise>
+            <func:result select="'D'"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </func:function>
+      <xsl:template match="/*/*">
+        <xsl:value-of select="xsl:rangeLookup(.)"/>
+      </xsl:template>
+    </xsl:stylesheet>
+    $
