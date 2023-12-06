@@ -21,7 +21,9 @@ Service export [export-coproc2all.zip](exports/export-coproc2all.zip) contains 4
 * port 2224: Transform Binary XSLT processing Non-XML
 * port 2225: XQuery processing XML
 * port 2226: JSONiq processing JSON
-* port 2227: GatewayScript (TBD)
+
+Service export [coproc2gatewayscript.zip](exports/coproc2gatewayscript.zip) contains one MPGW with its own XML manager:  
+* port 2227: GatewayScript processing binary/JSON/XML/…
 
 ## Clients
 
@@ -91,8 +93,20 @@ Sample [json2json.xq](samples/json2json.xq):
 
 ### GatewayScript 
 
-TBD
+Sample [reverse.js](samples/reverse.js):
 
+    $ echo -n 'foobar' | coproc2 reverse.js - http://dp-hermann-work.fyre.ibm.com:2227 ; echo
+    raboof
+    $ echo -ne 'foo\x00bar' | coproc2 reverse.js - http://dp-hermann-work.fyre.ibm.com:2227 2>/dev/null | od -Ax -tcx1
+    000000   r   a   b  \0   o   o   f
+            72  61  62  00  6f  6f  66
+    000007
+    s
+
+
+--- 
+
+--- 
 
 The die represents transformation+input, the robot arm represents DataPower and result is delivered in grey box:      
 ![die picker](res/die.anim.gif)
