@@ -108,5 +108,7 @@ Sample [reverse.js](samples/reverse.js):
 
 --- 
 
+### <a id="dies"></a>
+
 The die represents transformation+input, the robot arm represents DataPower and result is delivered in grey box:      
-![die picker](res/die.anim.gif)
+![die picker](res/die.anim.gif) ![dies](res/dies.jpg)
