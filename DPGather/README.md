@@ -9,8 +9,7 @@ https://www.ibm.com/support/pages/ibm-datapower-mustgather-automation-tool
 ## Deployment Instructions
 
 1.  Download the tool using the following command:
-```shell command: curl -L -O https://raw.githubusercontent.com/ibm-datapower/datapower-tools/master/DPGather/dpgather.py
-```
+```shell command: curl -L -O https://raw.githubusercontent.com/ibm-datapower/datapower-tools/master/DPGather/dpgather.py```
 2.  Run the tool using the command **`python3 dpgather.py`**.
 
 ## Need help?
