@@ -40,7 +40,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 This is execution of script with coproc2 client:  
 ```
-$ coproc2 js/GET_with_payload.js <("") http://dp-hermann-work.fyre.ibm.com:2227; echo
+$ coproc2 js/GET_with_payload.js <("") http://dp-hermann-work.fyre.ibm.com:2227
 HTTP/1.0 200 Script output follows
 Server: SimpleHTTP/0.6 Python/3.11.9
 Date: Mon, 02 Sep 2024 14:22:07 GMT
@@ -48,7 +48,6 @@ Content-Type: text/plain
 
 GET
 27
-
 $ 
 ```
 As expected GET is returned as HTTP request method, and 27 proves that indeed payload was sent.
