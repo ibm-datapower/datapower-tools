@@ -26,7 +26,7 @@ echo "$REQUEST_METHOD"
 echo "$CONTENT_LENGTH"
 httproot$ 
 ```
-The <kbd>stat</kbd> script creates a HTTP response consisting of the HTTP method and content length for HTTP request. That is all that is needed to verify below script.
+The <kbd>stat</kbd> script creates a HTTP response consisting of the HTTP method and content length for HTTP request. That is all that is needed to verify below GatewayScript.
 
 As said, serer is simply started this way:  
 ```
