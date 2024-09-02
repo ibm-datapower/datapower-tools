@@ -28,7 +28,7 @@ httproot$
 ```
 The <kbd>stat</kbd> script creates a HTTP response consisting of the HTTP method and content length for HTTP request. That is all that is needed to verify below GatewayScript.
 
-As said, serer is simply started this way:  
+As said, server is simply started this way:  
 ```
 httproot$ python3 -m http.server --cgi
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
