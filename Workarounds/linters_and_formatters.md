@@ -129,3 +129,6 @@ $ diff js/GET_with_payload.js G.js
 < 
 stammw:Workarounds$ 
 ```
+I did not use that tool until now, because [https://jslint.com](https://jslint.com) does not only lint a script. In addition it imposeses formatting rules with warnings. Here two exmples after I intentionally worsended the warning free script:  
+- Expected 'sm' at column 1, not column 3.
+- Expected one space between 'skipBackside' and '='.
