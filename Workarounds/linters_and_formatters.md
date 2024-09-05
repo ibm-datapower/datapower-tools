@@ -121,7 +121,7 @@ $ eslint js/GET_with_payload.js
 $
 ```
 
-For formatting GatewayScript I just found [prettier](https://prettier.io/docs/en/install.html) tool, After following the install steps, the prettyfied script looks the same with exception of a newline character:  
+For formatting GatewayScript I just found [prettier](https://prettier.io/docs/en/install.html) tool. After following the install steps, the prettyfied script looks the same with exception of a newline character:  
 ```
 $ npx prettier js/GET_with_payload.js > G.js
 $ diff js/GET_with_payload.js G.js 
