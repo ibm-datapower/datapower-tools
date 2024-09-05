@@ -1,5 +1,5 @@
 
-## Usefule linters and formatters
+## Useful linters and formatters
 
 ### XML
 
