@@ -6,4 +6,7 @@ This repo hosts workarounds for features that are not natively supported by Data
 [GET with payload against backend](GET_with_payload.md)  
 HTTP spec warns to make use of this, and DataPower does not support this.  
 
+[Useful linters and formatters](linters_and_formatters.md)  
+For XML as well as JSON.  
+
 To be continued ...
