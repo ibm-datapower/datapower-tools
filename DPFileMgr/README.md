@@ -1,5 +1,4 @@
 # IBM DataPower Support 2025 DataPower File Manager: dpfilemgr.py
-https://www.ibm.com/support/pages/ibm-datapower-mustgather-automation-tool
 
 ## Pre-Requisites
 
