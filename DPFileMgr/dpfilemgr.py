@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-#IBM DataPower Support 2025 DataPower File Manager v1.0 - Dominic Micale dmmicale (at) us.ibm.com
+#IBM DataPower Support 2025 DataPower File Manager v1.01 - Dominic Micale dmmicale (at) us.ibm.com
 #Python3 required, Python 3.13.3 tested.
 #1) Connect to DataPower using Rest Management Interface with command arguments (url eg. https://192.168.0.2, port eg. 5554)
 #2) Identify available files to download or upload based on domain and subdir command arguments.  Default setting is to download only.  --upload-path will specify a file or dir.
@@ -144,7 +144,7 @@ def process_dir(base_url, port, headers, verify_ssl, domain, href, download_all,
         if files:
             for i, f in enumerate(files, 1):
                 print(f"  {i}. {f['name']}  → {base_url}:{port}{f['href']}")
-            if len(delete_file) > 0:
+            if delete_file is not None and len(delete_file) > 0:
                 if delete_file == 'select':
                     choice = input("  Enter file #s to **DELETE** (all, 1-3,5), or Enter to skip: ").strip()
                     indices = parse_selection(choice, len(files)) if choice else []
@@ -157,7 +157,7 @@ def process_dir(base_url, port, headers, verify_ssl, domain, href, download_all,
                 indices = parse_selection(choice, len(files)) if choice else []
 
             for idx in indices:
-                if len(delete_file) > 0:
+                if delete_file is not None and len(delete_file) > 0:
                     call_delete_file(base_url, port, headers, verify_ssl, files[idx]["href"], domain)
                 else:
                     download_file(base_url, port, headers, verify_ssl, files[idx]["href"], domain)
