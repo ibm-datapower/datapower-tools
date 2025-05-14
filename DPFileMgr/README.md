@@ -16,6 +16,7 @@
 	- --upload-path : Specify a local file or directory with files to create, upload or replace on the DataPower based on the domain and subdir specified.
 	- --overwrite : Overwrite existing files when uploading
 	- --skip-ssl : Skip SSL certificate validation
+	- --delete-file : String can either be "select" to allow selection (choice) of files to delete, you can specify a direct filename / directory for wildcard and lastly you can provide a regex to wildcard match files.
 ## Need help?
 
 -  Open a ticket with IBM Support in the IBM DataPower product

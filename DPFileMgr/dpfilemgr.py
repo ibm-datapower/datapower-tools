@@ -8,7 +8,9 @@ import os
 import requests
 import base64
 import argparse
-
+import re
+import json
+from requests.exceptions import HTTPError;
 
 def get_auth_header(user, password):
     token = base64.b64encode(f"{user}:{password}".encode()).decode()
@@ -39,6 +41,40 @@ def parse_selection(sel, total):
                 chosen.add(idx)
     return sorted(chosen)
 
+def parse_delete_regex(files, delete_pattern, total):
+    chosen = set()
+    for i, f in enumerate(files, 1):
+        href = f.get('href','')
+        if is_regex(delete_pattern):
+            rx = re.compile(delete_pattern)
+            if rx.search(href):
+                y = i - 1
+                chosen.add(int(y))
+        else:
+            if delete_pattern in f['href']:
+                y = i - 1
+                chosen.add(int(y))
+    return sorted(chosen)
+
+def call_delete_file(base_url, port, headers, verify_ssl, href, domain):
+    url = f"{base_url}:{port}{href}"
+    print(f"▶️  Deleting {url}")
+    r = requests.delete(url, headers=headers, verify=verify_ssl)
+    try:
+        r.raise_for_status()
+    except HTTPError as e:
+        if resp.status_code == 404:
+            #ignore delete sometimes we get 404
+            pass
+        else:
+            raise
+
+    try:
+        data = r.json()
+    except ValueError:
+        return
+        
+    print(f"  ✅ deleted {href}")
 
 def download_file(base_url, port, headers, verify_ssl, href, domain):
     url = f"{base_url}:{port}{href}"
@@ -79,8 +115,16 @@ def download_file(base_url, port, headers, verify_ssl, href, domain):
         f.write(content)
     print(f"  ✅ saved {rel}")
 
+def is_regex(pattern: str) -> bool:
+    return bool(re.search(r'[\[\]\+\*\?\(\)\{\}\\]', pattern))
 
-def process_dir(base_url, port, headers, verify_ssl, domain, href, download_all):
+def match_delete(file_href:str, delete_pattern: str) -> bool:
+    if is_regex(delete_pattern):
+        return bool(re.search(delete_pattern, file_href))
+    else:
+        return delete_pattern in file_href
+
+def process_dir(base_url, port, headers, verify_ssl, domain, href, download_all, delete_file):
     full = f"{base_url}:{port}{href}"
     print(f"\n▶️  Requesting {full}")
     r = requests.get(full, headers=headers, verify=verify_ssl)
@@ -100,21 +144,29 @@ def process_dir(base_url, port, headers, verify_ssl, domain, href, download_all)
         if files:
             for i, f in enumerate(files, 1):
                 print(f"  {i}. {f['name']}  → {base_url}:{port}{f['href']}")
-
-            if download_all:
+            if len(delete_file) > 0:
+                if delete_file == 'select':
+                    choice = input("  Enter file #s to **DELETE** (all, 1-3,5), or Enter to skip: ").strip()
+                    indices = parse_selection(choice, len(files)) if choice else []
+                else:
+                    indices = parse_delete_regex(files, delete_file, len(files))
+            elif download_all:
                 indices = list(range(len(files)))
             else:
                 choice = input("  Enter file #s to download (all, 1-3,5), or Enter to skip: ").strip()
                 indices = parse_selection(choice, len(files)) if choice else []
 
             for idx in indices:
-                download_file(base_url, port, headers, verify_ssl, files[idx]["href"], domain)
+                if len(delete_file) > 0:
+                    call_delete_file(base_url, port, headers, verify_ssl, files[idx]["href"], domain)
+                else:
+                    download_file(base_url, port, headers, verify_ssl, files[idx]["href"], domain)
 
         subs = l.get("directory")
         if isinstance(subs, dict): subs = [subs]
         subs = subs or []
         for sd in subs:
-            process_dir(base_url, port, headers, verify_ssl, domain, sd["href"], download_all)
+            process_dir(base_url, port, headers, verify_ssl, domain, sd["href"], download_all, delete_file)
 
 
 def create_remote_dir(base_url, port, headers, verify_ssl, remote_href):
@@ -173,6 +225,7 @@ def main():
     p.add_argument("--subdir",                                                           help="Start at this subdir")
     p.add_argument("--download-all",  action="store_true",               help="Download all files without prompting")
     p.add_argument("--upload-path",                                    help="Local file or dir to upload")
+    p.add_argument("--delete-file",                                    help="Select file(s) to delete")
     p.add_argument("--overwrite",     action="store_true",               help="Overwrite existing files on upload")
     p.add_argument("--user",          required=True)
     p.add_argument("--password",      required=True)
@@ -190,11 +243,11 @@ def main():
                          args.domain, remote_base, args.overwrite)
         return
 
-    # Otherwise do download mode
+    # Otherwise do download/delete mode
     if args.subdir:
         sd   = args.subdir.rstrip(":")
         href = f"/mgmt/filestore/{args.domain}/{sd}"
-        process_dir(args.url, args.port, headers, verify_ssl, args.domain, href, args.download_all)
+        process_dir(args.url, args.port, headers, verify_ssl, args.domain, href, args.download_all, args.delete_file)
     else:
         base_href = f"/mgmt/filestore/{args.domain}"
         r = requests.get(f"{args.url}:{args.port}{base_href}", headers=headers, verify=verify_ssl)
@@ -204,7 +257,7 @@ def main():
         for loc in locs:
             nm   = loc["name"].rstrip(":")
             href = f"/mgmt/filestore/{args.domain}/{nm}"
-            process_dir(args.url, args.port, headers, verify_ssl, args.domain, href, args.download_all)
+            process_dir(args.url, args.port, headers, verify_ssl, args.domain, href, args.download_all, args.delete_file)
 
 if __name__ == "__main__":
     main()
