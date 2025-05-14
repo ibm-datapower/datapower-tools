@@ -63,7 +63,7 @@ def call_delete_file(base_url, port, headers, verify_ssl, href, domain):
     try:
         r.raise_for_status()
     except HTTPError as e:
-        if resp.status_code == 404:
+        if r.status_code == 404:
             #ignore delete sometimes we get 404
             pass
         else:
