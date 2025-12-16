@@ -1546,7 +1546,7 @@ def EstablishWindowsExpect():
     elif execCmd == "docker":
         execCmd = execCmd +' attach '+ target
     elif execCmd == "oc" or execCmd == "kubectl":
-        execCmd = execCmd +' attach -it '+ target +' --detach-keys abc'
+        execCmd = execCmd +' attach -it '+ target
         if namespace != "": execCmd = execCmd +' -n '+ namespace
 
     printDebug(Fore.GREEN, "connection command: ["+ execCmd +"]")
